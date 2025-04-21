@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -18,21 +19,18 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="user_id")
     private long userId;
+    @Column(name="name")
     private String name;
+    @Column(name="emailId")
     private String emailId;
+    @Column(name="phoneNumber")
     private String phoneNumber;
+    @Column(name="countryCode")
     private String countryCode;
+    @Column(name="watcherIds")
+    private List<Watcher> watchers;
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userId == user.userId && Objects.equals(name, user.name) && Objects.equals(emailId, user.emailId) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(countryCode, user.countryCode);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, name, emailId, phoneNumber, countryCode);
-    }
 }
